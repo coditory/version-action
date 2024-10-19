@@ -4,22 +4,33 @@ branding:
   icon: 'file'
   color: 'blue'
 inputs:
-  skip-files:
-    description: 'Grep file patterns separated with new line that should not trigger action'
+  increment_section:
+    description: 'Version section to increment. Possible values: major, minor, patch'
+    required: true
+    default: 'patch'
+  snapshot:
+    description: 'In the next version should be a snapshot version'
+    required: true
+    default: 'false'
+  manual_version:
+    description: 'Manually specified next version that should be validated'
     required: false
     default: ''
 outputs:
-  skip:
-    description: 'Whether the action should be skipped'
-    value: ${{ steps.skipper.outputs.skip }}
+  version:
+    description: 'Current version'
+    value: ${{ steps.version.outputs.version }}
+  next_version:
+    description: 'Next version'
+    value: ${{ steps.version.outputs.next_version }}
 runs:
   using: "composite"
   steps:
     - id: skipper
       shell: bash
       env:
-        SKIP_FILES: ${{ inputs.skip-files }}
-        PUSH_SHAS: ${{ join(github.event.commits.*.id, ' ') || 'none' }}
-        PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-        PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        INCREMENT_SECTION: ${{ inputs.increment_section }}
+        SNAPSHOT: ${{ inputs.snapshot }}
+        MANUAL_VERSION: ${{ inputs.manual_version }}
+        DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
       run: $GITHUB_ACTION_PATH/action.sh
