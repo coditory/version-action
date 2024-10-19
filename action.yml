@@ -4,7 +4,7 @@ branding:
   icon: 'file'
   color: 'blue'
 inputs:
-  increment_section:
+  increment-section:
     description: 'Version section to increment. Possible values: major, minor, patch'
     required: true
     default: 'patch'
@@ -12,7 +12,7 @@ inputs:
     description: 'In the next version should be a snapshot version'
     required: true
     default: 'false'
-  manual_version:
+  manual-version:
     description: 'Manually specified next version that should be validated'
     required: false
     default: ''
