@@ -1,0 +1,25 @@
+name: 'Action skipper'
+description: 'Used to skip actions when there are no important files and previos run succeeded.'
+branding:
+  icon: 'file'
+  color: 'blue'
+inputs:
+  skip-files:
+    description: 'Grep file patterns separated with new line that should not trigger action'
+    required: false
+    default: ''
+outputs:
+  skip:
+    description: 'Whether the action should be skipped'
+    value: ${{ steps.skipper.outputs.skip }}
+runs:
+  using: "composite"
+  steps:
+    - id: skipper
+      shell: bash
+      env:
+        SKIP_FILES: ${{ inputs.skip-files }}
+        PUSH_SHAS: ${{ join(github.event.commits.*.id, ' ') || 'none' }}
+        PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      run: $GITHUB_ACTION_PATH/action.sh
