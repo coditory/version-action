@@ -43,7 +43,7 @@ function main() {
     nextVersion="${nextVersion}-SNAPSHOT"
   fi
   echo "version: $version"
-  echo "nextVersion: $nextVersion"
+  echo "next_version: $nextVersion"
   echo "version=$version" >> $GITHUB_OUTPUT
   echo "next_version=$nextVersion" >> $GITHUB_OUTPUT
 }
