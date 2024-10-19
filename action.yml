@@ -1,7 +1,7 @@
-name: 'Action skipper'
-description: 'Used to skip actions when there are no important files and previos run succeeded.'
+name: 'Version parser'
+description: 'Parses current version from git tags and ouputs next version.'
 branding:
-  icon: 'file'
+  icon: 'clock'
   color: 'blue'
 inputs:
   increment-section:
@@ -26,7 +26,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - id: skipper
+    - id: version
       shell: bash
       env:
         INCREMENT_SECTION: ${{ inputs.increment-section }}
