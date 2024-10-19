@@ -42,10 +42,8 @@ function main() {
   if [ "$SNAPSHOT" == "true" ] && ! [[ "$nextVersion" =~ ^.*-SNAPSHOT$ ]]; then
     nextVersion="${nextVersion}-SNAPSHOT"
   fi
-  echo "version: $version"
-  echo "next_version: $nextVersion"
-  echo "version=$version" >> $GITHUB_OUTPUT
-  echo "next_version=$nextVersion" >> $GITHUB_OUTPUT
+  echo "version=$version" | tee -a $GITHUB_OUTPUT
+  echo "next_version=$nextVersion" | tee -a $GITHUB_OUTPUT
 }
 
 main
