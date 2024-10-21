@@ -44,3 +44,10 @@ jobs:
           echo "Simulating snapshot publish to maven central with version: $NEXT_VERSION"
           echo "### Published snapshot version $NEXT_VERSION 🚀" | tee -a $GITHUB_STEP_SUMMARY
 ```
+
+## References
+
+See:
+- [Other Coditory workflows](https://github.com/topics/coditory-workflows)
+- [Coditory actions](https://github.com/topics/coditory-actions)
+
